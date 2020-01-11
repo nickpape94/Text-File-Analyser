@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,32 +13,40 @@ import java.util.stream.Collectors;
 
 public class FileReading {
 
+	String fileInput = "C:\\Users\\Nick-\\Java-Projects\\test.txt";
+
+	public BufferedReader readFile() throws FileNotFoundException {
+		BufferedReader fileIn = new BufferedReader(new FileReader(fileInput));
+		return fileIn;
+	}
+
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		new FileReading().wordCount_andAverageWordLength();
 		new FileReading().numWordsOfLength();
-		
 
 	}
+
 	public void wordCount_andAverageWordLength() throws FileNotFoundException {
-		BufferedReader fileIn = new BufferedReader(new FileReader("C:\\Users\\Nick-\\Java-Projects\\test.txt"));
+		BufferedReader fileIn = readFile();
 		String line;
+
 		// Word count of text file
 		try {
 			while ((line = fileIn.readLine()) != null) {
 				int word_count = 0;
 				int letter_count = -1;
-				
+
 				String[] wordsInFile = line.split("\\s+");
 				word_count = word_count + wordsInFile.length;
 				for (int i = 0; i < line.length(); i++) {
 					if (line.charAt(i) != ' ')
 						letter_count++;
 				}
-				
+
 				double average = letter_count / (double) word_count;
-				average=Math.floor(average*1000) / 1000;
-				
+				average = Math.floor(average * 1000) / 1000;
+
 				System.out.println("Word count: " + word_count);
 				System.out.println("Average word length: " + average);
 			}
@@ -51,7 +58,7 @@ public class FileReading {
 	}
 
 	public void numWordsOfLength() throws FileNotFoundException {
-		BufferedReader fileIn = new BufferedReader(new FileReader("C:\\Users\\Nick-\\Java-Projects\\test.txt"));
+		BufferedReader fileIn = readFile();
 		String line;
 
 		try {
@@ -63,99 +70,64 @@ public class FileReading {
 				int numWordsOfLength_5 = 0;
 				int numWordsOfLength_7 = 0;
 				int numWordsOfLength_10 = 0;
-				
-				List<String> wordsSorted = new ArrayList<String>();
-	
-				
-				
 
-				int lengthString = line.length();
+				List<String> wordsSorted = new ArrayList<String>();
+
 				String[] wordsInFile = line.split("[\\s\\.]+");
 
 				for (String word : wordsInFile) {
 					if (word.length() == 1) {
 						numWordsOfLength_1++;
 						wordsSorted.add(word);
-						
+
 					}
 					if (word.length() == 2) {
 						numWordsOfLength_2++;
 						wordsSorted.add(word);
-						
+
 					}
 					if (word.length() == 3) {
 						numWordsOfLength_3++;
 						wordsSorted.add(word);
-						
+
 					}
 					if (word.length() == 4) {
 						numWordsOfLength_4++;
 						wordsSorted.add(word);
-						
+
 					}
-					
+
 					if (word.length() == 5) {
 						numWordsOfLength_5++;
 						wordsSorted.add(word);
-						
+
 					}
 					if (word.length() == 7) {
 						numWordsOfLength_7++;
 						wordsSorted.add(word);
-						
+
 					}
 					if (word.length() == 10) {
 						numWordsOfLength_10++;
 						wordsSorted.add(word);
-						
+
 					}
 				}
-				
-				
-				
-				
-				List<Integer> numWords0fLength = Arrays.asList(
-						numWordsOfLength_1, 
-						numWordsOfLength_2, 
-						numWordsOfLength_3,
-						numWordsOfLength_4, 
-						numWordsOfLength_5, 
-						numWordsOfLength_7,
-						numWordsOfLength_10
-						);
-				
-				String[] test = wordsSorted.toArray(new String[0]);
-				
 
-				
+				List<Integer> numWords0fLength = Arrays.asList(numWordsOfLength_1, numWordsOfLength_2,
+						numWordsOfLength_3, numWordsOfLength_4, numWordsOfLength_5, numWordsOfLength_7,
+						numWordsOfLength_10);
+
 				int mostFrequentWordLength = Collections.max(numWords0fLength);
-				
-				
-				List<Integer> maxRepeatingSizes =
-					    Arrays.stream(test)
-					            .collect(Collectors.groupingBy(
-					                String::length,
-					                Collectors.counting()
-					            )).entrySet()
-					            .stream()
-					            .collect(
-					                    Collectors.groupingBy(
-					                            Map.Entry::getValue,
-					                            Collectors.mapping(
-					                                Map.Entry::getKey,
-					                                Collectors.toList()
-					                            )
-					                    )
-					            ).entrySet()
-					            .stream()
-					            .max(
-					                    Map.Entry.comparingByKey()
-					            ).get()
-					            .getValue();
-				
 
-				
-				
+				String[] test = wordsSorted.toArray(new String[0]);
+
+				List<Integer> maxRepeatingSizes = Arrays.stream(test)
+						.collect(Collectors.groupingBy(String::length, Collectors.counting())).entrySet().stream()
+						.collect(Collectors.groupingBy(Map.Entry::getValue,
+								Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
+						.entrySet().stream().max(Map.Entry.comparingByKey()).get().getValue();
+
 				System.out.println("Number of words of length 1: " + numWordsOfLength_1);
 				System.out.println("Number of words of length 2: " + numWordsOfLength_2);
 				System.out.println("Number of words of length 3: " + numWordsOfLength_3);
@@ -163,7 +135,8 @@ public class FileReading {
 				System.out.println("Number of words of length 5: " + numWordsOfLength_5);
 				System.out.println("Number of words of length 7: " + numWordsOfLength_7);
 				System.out.println("Number of words of length 10: " + numWordsOfLength_10);
-				System.out.println("The most frequently occurring word length is "+ mostFrequentWordLength + " for word lengths " + maxRepeatingSizes);
+				System.out.println("The most frequently occurring word length is " + mostFrequentWordLength
+						+ " for word lengths " + maxRepeatingSizes);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -171,6 +144,5 @@ public class FileReading {
 		}
 
 	}
-	
 
 }
