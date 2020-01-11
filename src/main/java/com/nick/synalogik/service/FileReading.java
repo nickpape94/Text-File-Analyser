@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,36 +15,13 @@ import java.util.stream.Collectors;
 public class FileReading {
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader fileIn = new BufferedReader(new FileReader("C:\\Users\\Nick-\\Java-Projects\\test.txt"));
 		// TODO Auto-generated method stub
-		new FileReading().averageWordLength();
+		new FileReading().wordCount_andAverageWordLength();
 		new FileReading().numWordsOfLength();
-		//new FileReading().numWordsOfLength2();
+		
 
 	}
-
-//	public void wordCount() throws FileNotFoundException {
-//		BufferedReader fileIn = new BufferedReader(new FileReader("C:\\Users\\Nick-\\Java-Projects\\test.txt"));
-//
-//		String line;
-//		// Word count of text file
-//		try {
-//			while ((line = fileIn.readLine()) != null) {
-//				int word_count = 0;
-//				int lengthString = line.length();
-//				String[] wordsInFile = line.split("\\s");
-//				word_count = word_count + wordsInFile.length;
-//				System.out.println("Word count: " + word_count);
-//
-//			}
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//	}
-
-	public void averageWordLength() throws FileNotFoundException {
+	public void wordCount_andAverageWordLength() throws FileNotFoundException {
 		BufferedReader fileIn = new BufferedReader(new FileReader("C:\\Users\\Nick-\\Java-Projects\\test.txt"));
 		String line;
 		// Word count of text file
@@ -51,14 +29,19 @@ public class FileReading {
 			while ((line = fileIn.readLine()) != null) {
 				int word_count = 0;
 				int letter_count = -1;
+				
 				String[] wordsInFile = line.split("\\s+");
 				word_count = word_count + wordsInFile.length;
 				for (int i = 0; i < line.length(); i++) {
 					if (line.charAt(i) != ' ')
 						letter_count++;
 				}
+				
+				double average = letter_count / (double) word_count;
+				average=Math.floor(average*1000) / 1000;
+				
 				System.out.println("Word count: " + word_count);
-				System.out.println("Average word length: " + letter_count / (double) word_count);
+				System.out.println("Average word length: " + average);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
