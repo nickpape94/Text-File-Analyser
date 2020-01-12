@@ -18,7 +18,7 @@ import com.nick.synalogik.service.FileReading;
 
 public class FileReadingTest {
 	private String fileInput = FileReading.fileInput;
-	public String splitDeliminator = "[,*;:.@?!_'\\s]+";
+	public String splitDeliminator = "[,*;:.£$%+|=@?!_'\\s]+";
 
 	@Test
 	public void readFile() throws FileNotFoundException {

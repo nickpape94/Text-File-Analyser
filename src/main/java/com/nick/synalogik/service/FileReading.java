@@ -13,13 +13,14 @@ import java.util.stream.Collectors;
 
 public class FileReading {
 
-	public static String fileInput = "C:\\Users\\Nick-\\Java-Projects\\test3.txt";
-	String splitDeliminator = "[,*;:.@?!_'\\s]+";
+	public static String fileInput = "C:\\Users\\Nick-\\Java-Projects\\test2.txt";
+	String splitDeliminator = "[,*;:.£$%+|=@?!_'\\s]+";
+	
 
 	public Scanner readFile() throws FileNotFoundException {
 		Scanner in = new Scanner(new File(fileInput));
 		return in;
-
+ 
 	}
 
 	public static void main(String[] args) throws IOException {
