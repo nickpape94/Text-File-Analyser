@@ -12,22 +12,36 @@ import java.util.stream.Collectors;
 
 public class FileReading {
 
-	String fileInput = "C:\\Users\\Nick-\\Java-Projects\\test5.txt";
-	String splitDeliminator = "[,*;:.@?!_'\\s]+";
+	 public static String fileInput = "C:\\Users\\Nick-\\Java-Projects\\test.txt";
+	 String splitDeliminator = "[,*;:.@?!_'\\s]+";
 
 	public Scanner readFile() throws FileNotFoundException {
 		Scanner in = new Scanner(new File(fileInput));
 		return in;
+		
 	}
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		new FileReading().wordCount_andAverageWordLength();
+		new FileReading().wordCount();
+		new FileReading().averageWordLength();
 		new FileReading().numWordsOfLength();
 
 	}
 
-	public void wordCount_andAverageWordLength() throws FileNotFoundException {
+	public int wordCount() throws FileNotFoundException {
+		Scanner in = readFile();
+		List<String> listwords = new ArrayList<>();
+		while (in.hasNext()) {
+			listwords.addAll(Arrays.asList(in.next().split(splitDeliminator)));
+		}
+
+		System.out.println("Word count: " + listwords.size());
+		return listwords.size();
+		
+	}
+	
+	public double averageWordLength() throws FileNotFoundException {
 		Scanner in = readFile();
 		List<String> listwords = new ArrayList<>();
 		int letter_count = 0;
@@ -43,8 +57,9 @@ public class FileReading {
 		double average = letter_count / (double) listwords.size();
 		average = Math.floor(average * 1000) / 1000;
 
-		System.out.println("Word count: " + listwords.size());
 		System.out.println("Average word length: " + average);
+		return average;
+		
 	}
 
 	public void numWordsOfLength() throws FileNotFoundException {
@@ -116,8 +131,11 @@ public class FileReading {
 					.collect(Collectors.groupingBy(Map.Entry::getValue,
 							Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
 					.entrySet().stream().max(Map.Entry.comparingByKey()).get().getValue();
+			
+			
 
-			System.out.println(listwords);
+			//System.out.println(wordsSorted);
+			//System.out.println(in);
 			System.out.println("Number of words of length 1: " + numWordsOfLength_1);
 			System.out.println("Number of words of length 2: " + numWordsOfLength_2);
 			System.out.println("Number of words of length 3: " + numWordsOfLength_3);
@@ -127,7 +145,8 @@ public class FileReading {
 			System.out.println("Number of words of length 10: " + numWordsOfLength_10);
 			System.out.println("The most frequently occurring word length is " + mostFrequentWordLength
 					+ " for word lengths " + maxRepeatingSizes);
-
+			
+		
 		}
 
 	}
