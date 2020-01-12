@@ -1,0 +1,37 @@
+TEXT FILE ANALYSER 
+
+INSTALLATION
+
+1)
+	a) Run "git clone https://github.com/nickpape94/Text-File-Analyser.git" in target folder
+	b) Or extract from the email to target folder
+
+2) Ensure Java is installed on your operating system, and open the folder up in your favourite IDE or text editor
+
+3) Within src/main/java in FileReading.java, you'll find the declared string  'fileInput' right below the class FileReading:
+	
+	public static String fileInput = "C:\\Users\\Nick-\\Java-Projects\\test3.txt";
+
+Here, between the quotation marks, enter the location of the text file on your disc that you want to analyse. 
+
+4) Save with ctrl+s 
+
+5) Run Maven clean and then Maven install
+
+6) Run FileReading.java to display the results of the analysis to the console 
+
+7) Every time you want to analyse a new .txt file, just update fileInput with the location of the desired file. 
+
+
+TESTS
+
+1) After running Maven install, a Jacoco code coverage report will be generated within target/site/jacoco/jacoco-resources/index.html for you to view at your discretion
+
+(The unit tests built for this program are located in src/test/java)
+
+
+ASSUMPTIONS MADE
+
+- Based on the example given, I wrote the program with the intent that any date in the format dd/mm/yyyy (or similar) would be considered as a word, and thus would not be discounted from the analysis.
+
+- The splitDeliminator right below the file input are the variables I decided to eliminate during the split of the text document. So I did my best to ensure that any trailing white space or non-alphanumeric characters (baring the exception of ampersands and slashes) would not contribute to the analysis of a word.
